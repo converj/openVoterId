@@ -1,0 +1,92 @@
+
+/**********************************************************************************/
+/* Styles for HTML element types */
+
+ul {  margin:10px 0px 10px 0px;  }
+
+a {  text-decoration:none;  color:blue;  cursor:pointer;  }
+a:hover , a:active {  text-decoration:underline;  }
+
+details {  margin-bottom:15px;  }
+details > summary {  cursor:pointer;  }
+
+
+label {  color:black;  opacity:0.6;  }
+input , textarea {
+    width:calc(100% - 20px);  margin-bottom:10px;  padding:5px;
+    font-family:sans-serif;  font-size:1.0em;  box-shadow:0px 0px 10px 1px #e8e8e8 inset;
+}
+select {  font-size:inherit;  }
+textarea {  line-height:1.5em;  }
+input[ type=checkbox ] {  width:auto;  }
+fieldset {  border:solid #e0e0e0 1px;  border-radius:5px;  padding:10px;  }
+    fieldset input {  width:calc(100% - 20px);  }
+:invalid {  background-color:pink;  }
+:focus {  outline:5px solid lightblue;  outline-offset:0px;  }
+
+::placeholder {  color:#dddddd;  opacity:1.0;  }
+::-ms-input-placeholder {  color:#dddddd;  }  /* Microsoft edge */
+ :-ms-input-placeholder {  color:#dddddd;  }  /* Internet explorer 10-11 */
+
+
+button {  
+    background-color:#eeeeee;  
+    background:linear-gradient(#f8f8f8, #e8e8e8);  
+    
+    border:solid 1px #aaaaaa;  
+    border-radius:5px;
+    box-shadow:-1px -1px 2px #ccc inset;
+
+    margin:5px;  
+    padding:15px 7px 15px 7px;  
+
+    line-height:2.0em;  
+    font-size:16px;  
+}
+button:hover {  background:rgb(206,231,256);  color:black;  }
+
+[role=alert] {  opacity:0.0;  transition:opacity 2.0s;  visibility:hidden;  }
+
+
+/**********************************************************************************/
+/* Styles for page template */
+
+body {  padding:0px;  margin:0px;  font-family:sans-serif;  background-color:#f8f8f8;  line-height:2.0em;  }
+    #content {  max-width:800px;  margin:0px auto 20px auto;  padding:0px 5px 5px 5px;  }
+
+        #menu {  }
+            #menuList {  background-color:#f0f0f0;  margin:0px;  padding:0px;  }
+                .menuItem {  
+                    display:inline-block;  margin:0px;  padding:10px;  background-color:#e0e0e0;
+                    border:solid #c0c0c0 1px;  border-radius:3px;  
+                }
+                .menuItem:hover {  background-color:lightblue;  }
+                a .menuItem {  color:#808080;  text-decoration:none;  }
+
+        #siteTitle {  margin:0px;  text-align:center;  font-weight:normal;  color:#aaaaaa;  background-color:#e0e0e0;  }
+        #pageTitle {  margin:20px 0px 0px 0px;  text-align:center;  font-weight:bold;   }
+
+
+
+/**********************************************************************************/
+/* Overrides for wide-screen */
+
+@media(min-width:800px) {  }
+
+
+
+/**********************************************************************************/
+/* Styles for admin page */
+
+.errorMessage { color:red; }
+.successMessage { color:green; }
+
+
+/**********************************************************************************/
+/* Styles for login page */
+
+
+/**********************************************************************************/
+/* Styles for about page */
+
+

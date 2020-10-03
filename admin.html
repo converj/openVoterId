@@ -1,0 +1,104 @@
+{% include 'pageHead.html' %}
+
+
+<h1 id=pageTitle> Administer </h1>
+
+<div class=errorMessage>{{errorMessage}}</div>
+<div class=successMessage>{{successMessage}}</div>
+
+<!-- Authorization -->
+<fieldset>
+    <div>
+        <label for=adminSecret> Admin Secret </label>
+        <input id=adminSecret type=password autofocus placeholder='Administrator key' title='Administrator key' />
+    </div>
+    <div>
+        <label for=adminPassword> Admin password </label>
+        <input id=adminPassword name=adminPassword type=password title='Admin password' />
+    </div>
+</fieldset>
+
+
+<!-- Set admin password -->
+<form method=post action='admin'>
+    <input class=adminSecret name=adminSecret type=hidden />
+    <input class=adminPassword name=adminPassword type=hidden />
+    <input type=hidden name=operation value='setAdminPassword' />
+
+    <h2> Set admin password </h2>
+    <fieldset>
+        <div> Already set: {{hasAdminPassword}} </div>
+        <div>
+            <button type=submit {{setAdminPasswordDisabled}} > Set password </button>
+        </div>
+    </fieldset>
+</form>
+
+
+<!-- New application -->
+<form id=adminForm method=post action='admin'>
+    <input class=adminSecret name=adminSecret type=hidden />
+    <input class=adminPassword name=adminPassword type=hidden />
+    <input type=hidden name=operation value='newApplication' />
+
+    <h2> New application </h2>
+    <fieldset>
+        <div>
+            <label for=returnUrl> Application login-return URL </label>
+            <input id=returnUrl name=returnUrl type=text placeholder='https://...'
+                title='Application login-success handling URL' />
+        </div>
+        <div>
+            <button type=submit> Create application </button>
+        </div>
+    </fieldset>
+</form>
+
+
+<!-- Update application return URL -->
+<form id=adminForm method=post action='admin'>
+    <input class=adminSecret name=adminSecret type=hidden />
+    <input class=adminPassword name=adminPassword type=hidden />
+    <input name=operation type=hidden value='updateApplication' />
+
+    <h2> Update application </h2>
+    <fieldset>
+        <div>
+            <label for=applicationId> Application ID </label>
+            <input id=applicationId name=applicationId type=text placeholder='' title='Application ID' />
+        </div>
+        <div>
+            <label for=returnUrlForUpdate> Application login-return URL </label>
+            <input id=returnUrlForUpdate name=returnUrl type=text placeholder='https://...'
+                title='Application login-success handling URL' />
+        </div>
+        <div>
+            <button type=submit> Update application </button>
+        </div>
+    </fieldset>
+</form>
+
+
+<script>
+
+    function id(elementId){  return document.getElementById(elementId);  }
+    function className(name){  return document.getElementsByClassName(name);  }
+
+    // Copy adminSecret to every form
+    function syncForms(){
+        for ( let a of className('adminSecret') ){
+            a.value = id('adminSecret').value;
+        }
+        for ( let a of className('adminPassword') ){
+            a.value = id('adminPassword').value;
+        }
+    }
+    syncForms();  // On page load
+    id('adminSecret').oninput = syncForms;
+    id('adminPassword').oninput = syncForms;
+
+</script>
+
+
+{% include 'pageFoot.html' %}
+

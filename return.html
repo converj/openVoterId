@@ -1,0 +1,34 @@
+{% include 'pageHead.html' %}
+
+<h1 id=pageTitle> Login Succeded </h1>
+
+<form id=redirectForm method=post action='{{redirectUrl}}' >
+    <input type=hidden name=requestId value='{{requestId}}' />
+    <input type=hidden name=responseSignature value='{{responseSignature}}' />
+    <input type=hidden name=voterId value='{{voterId}}' />
+    <input type=hidden name=city value='{{city}}' />
+
+    <div class=successMessage> Verified </div>
+    <div> Returning you to application at {{redirectUrl}} </div>
+    <div>
+        <label for=voterId> Voter ID </label>
+        <input id=voterId name=voterId value='{{voterId}}' disabled />
+    </div>
+    <div>
+        <label for=city> City </label>
+        <input id=city name=city value='{{city}}' disabled />
+    </div>
+    <div>
+        <button type=submit> Return </button>
+    </div>
+</form>
+
+
+<script>
+    var redirectForm = document.getElementById('redirectForm');
+    redirectForm.submit();
+</script>
+
+
+{% include 'pageFoot.html' %}
+

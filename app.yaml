@@ -1,0 +1,21 @@
+service: openvoterid
+runtime: python27
+api_version: 1
+threadsafe: true
+
+libraries:
+- name: jinja2
+  version: latest
+
+
+
+handlers:
+- url: /(.*\.(png|css|js))$
+  static_files: \1
+  upload: .*\.(png|css|js)$
+
+- url: /.*
+  script: main.app
+  secure: always
+
+

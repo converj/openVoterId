@@ -1,0 +1,91 @@
+{% include 'pageHead.html' %}
+
+
+<h1 id=pageTitle> Login </h1>
+
+<div id=message class=errorMessage>{{errorMessage}}</div>
+
+<form id=login method=post action='login'>
+
+    <!-- Hidden inputs -->
+    <input type=hidden name=fingerprint id=fingerprint value='{{fingerprint}}' />
+    <input name=applicationId type=hidden value='{{applicationId}}' />
+    <input name=requestId type=hidden value='{{requestId}}' />
+    <input name=inputSignature type=hidden value='{{inputSignature}}' />
+
+    <!-- User identity -->
+    <div>
+        <label for=inputName> Name </label>
+        <input id=inputName name=name type=text autofocus placeholder='Registered voter name'
+            title='Registered voter name' value='{{name}}' />
+    </div>
+    <div>
+        <label for=inputAddress> Address </label>
+        <input id=inputAddress1 name=address1 type=text placeholder='123 My Street #456'
+            title='Voter registration home address: street' value='{{address1}}' />
+        <input id=inputAddress2 name=address2 type=text placeholder='City ST 98765'
+            title='Voter registration home address: city, state, and zip-code' value='{{address2}}' />
+    </div>
+
+    <!-- User verification -->
+    <label for=verificationInputs> Verification </label>
+    <fieldset id=verificationInputs>
+        <div>
+            <label for=verificationType> Voter verification type </label>
+            <select id=verificationType  name=verificationType  title='Choose voter verification type' >
+                <option value='mailedCode' id=mailedCode> Mailed code </option>
+                <option value='phone' id=phone> Phone number </option>
+                <option value='birthdate' id=birthdate> Birth date </option>
+                <option value='socialSecurity' id=socialSecurity> Social security number </option>
+            </select>
+        </div>
+        <div>
+            <label for=verificationValue> Voter verification </label>
+            <input id=verificationValue name=verificationValue type=text 
+                placeholder='Voter verification'
+                title='Enter your voter verification' value='{{verificationValue}}' />
+        </div>
+    </fieldset>
+
+    <div>
+        <button type=submit>Login</button>
+    </div>
+
+</form>
+
+<script src='fingerprint.js'></script>
+<script>
+
+    window.onload = function( ){
+        console.log( 'window.onload' );
+
+        // Select current verification-type
+        var verificationTypeSelect = document.getElementById('verificationType');
+        var verificationTypeSelectedOpt = verificationTypeSelect.options.namedItem('{{verificationType}}');
+        if ( verificationTypeSelectedOpt ){  verificationTypeSelectedOpt.selected = true;  }
+        onVerificationTypeChange();
+
+        verificationTypeSelect.onchange = onVerificationTypeChange;
+        
+        // Collect browser fingerprint to bypass rate-limit locking
+        var fingerprintInput = document.getElementById('fingerprint');
+        console.log( 'fingerprintInput.value=', fingerprintInput.value );
+        if ( ! fingerprintInput.value ){  fingerprintInput.value = fingerprintBrowser();  }
+    };
+
+        function
+    onVerificationTypeChange( ) {
+        var verificationTypeSelect = document.getElementById('verificationType');
+        var selectedOption = verificationTypeSelect.options[ verificationTypeSelect.selectedIndex ];
+
+        // Match verification-value placeholder & title to verification-type
+        var verificationValueInput = document.getElementById('verificationValue');
+        verificationValueInput.placeholder = selectedOption.text;
+        verificationValueInput.title = 'Enter your ' + selectedOption.text;
+    }
+    
+</script>
+
+
+{% include 'pageFoot.html' %}
+
